@@ -6,7 +6,6 @@
     <title>MediaBook - Diário de Mídia Digital</title>
     <link rel="stylesheet" href="/frontend/src/styles/styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    
 </head>
 <body>
     <div class="app">
@@ -160,6 +159,14 @@
 
                 <!-- Media Grid -->
                 <section class="content">
+                    <!-- Campo de Pesquisa Grande -->
+                    <div class="search-section">
+                        <input type="text" id="searchField" placeholder="Pesquisar filmes por título..." class="search-input-large">
+                        <button id="searchButton" class="btn btn-primary">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+
                     <div class="media-grid" id="mediaGrid">
                         <!-- Media cards will be inserted here by JavaScript -->
                     </div>
@@ -239,5 +246,85 @@
     <div class="toast-container" id="toastContainer"></div>
 
     <script src="/frontend/src/components/script.js"></script>
+
+    <!-- Script de Busca OMDb Integrado -->
+    <script>
+        const apikey = 'f67311e';
+        const mediaGrid = document.getElementById("mediaGrid");
+        const emptyState = document.getElementById("emptyState");
+
+        function buscarFilmes(termo) {
+            fetch(`https://www.omdbapi.com/?s=${encodeURIComponent(termo)}&apikey=${apikey}`)
+                .then(res => res.json())
+                .then(json => carregarFilmes(json));
+        }
+
+        function carregarFilmes(json) {
+            mediaGrid.innerHTML = "";
+
+            if (json.Response === "False") {
+                emptyState.style.display = "block";
+                return;
+            }
+
+            emptyState.style.display = "none";
+
+            json.Search.forEach(filme => {
+                const poster = filme.Poster !== "N/A"
+                    ? filme.Poster
+                    : "https://via.placeholder.com/200x300?text=Sem+Imagem";
+
+                const card = document.createElement("div");
+                card.classList.add("media-card");
+                card.innerHTML = `
+                    <div class="card-poster">
+                        <img src="${poster}" alt="${filme.Title}">
+                        <span class="card-type-badge">Filme</span>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">${filme.Title}</h3>
+                        <p class="card-year">${filme.Year}</p>
+                    </div>
+                `;
+                mediaGrid.appendChild(card);
+            });
+        }
+
+        function carregarFilmesPopulares() {
+            const populares = [
+                "Avengers",
+                "Batman",
+                "Spider-Man",
+                "Harry Potter",
+                "Fast and Furious",
+                "Star Wars",
+                "Guardians of the Galaxy",
+                "Deadpool"
+            ];
+            const termo = populares[Math.floor(Math.random() * populares.length)];
+            buscarFilmes(termo);
+        }
+
+        // Campo de Pesquisa Grande
+        const searchField = document.getElementById("searchField");
+        const searchButton = document.getElementById("searchButton");
+
+        searchButton.addEventListener("click", () => {
+            const termo = searchField.value.trim();
+            if (termo === "") return alert("Digite o nome de um filme.");
+            buscarFilmes(termo);
+        });
+
+        searchField.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                const termo = searchField.value.trim();
+                if (termo === "") return alert("Digite o nome de um filme.");
+                buscarFilmes(termo);
+            }
+        });
+
+        window.addEventListener("load", carregarFilmesPopulares);
+    </script>
 </body>
 </html>
