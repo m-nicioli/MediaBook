@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diário de Mídia Digital</title>
+    <link rel="stylesheet" href="/frontend/src/styles/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app">
+        <div class="container">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-content">
+                    <div class="header-text">
+                        <h1>Diário de Mídia Digital</h1>
+                        <p class="subtitle">Organize e acompanhe seu consumo de conteúdo cultural</p>
+                    </div>
+                    <button class="btn btn-primary" id="addMediaBtn">
+                        <i class="fas fa-plus"></i>
+                        Adicionar Mídia
+                    </button>
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <main class="main">
+                <!-- Sidebar - Filters -->
+                <aside class="sidebar">
+                    <!-- Summary -->
+                    <div class="filter-section">
+                        <div class="summary">
+                            <div class="summary-text">
+                                <h2>Minha Biblioteca</h2>
+                                <p class="summary-count">5 itens na sua coleção</p>
+                            </div>
+                            <div class="view-modes">
+                                <button class="btn btn-sm view-mode-btn active" data-view="grid">
+                                    <i class="fas fa-th"></i>
+                                </button>
+                                <button class="btn btn-sm view-mode-btn" data-view="list">
+                                    <i class="fas fa-list"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Type Filters -->
+                    <div class="filter-section">
+                        <h3>Filtrar por Tipo</h3>
+                        <div class="filter-buttons">
+                            <button class="filter-btn active" data-type="all">
+                                <i class="fas fa-th"></i>
+                                <span>Todos</span>
+                                <span class="badge">5</span>
+                            </button>
+                            <button class="filter-btn" data-type="movie">
+                                <i class="fas fa-film"></i>
+                                <span>Filmes</span>
+                                <span class="badge">1</span>
+                            </button>
+                            <button class="filter-btn" data-type="series">
+                                <i class="fas fa-tv"></i>
+                                <span>Séries</span>
+                                <span class="badge">1</span>
+                            </button>
+                            <button class="filter-btn" data-type="book">
+                                <i class="fas fa-book"></i>
+                                <span>Livros</span>
+                                <span class="badge">1</span>
+                            </button>
+                            <button class="filter-btn" data-type="anime">
+                                <i class="fas fa-star"></i>
+                                <span>Anime</span>
+                                <span class="badge">2</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Status Filters -->
+                    <div class="filter-section">
+                        <h3>Filtrar por Status</h3>
+                        <div class="filter-buttons">
+                            <button class="status-filter-btn active" data-status="all">
+                                <span>Todos</span>
+                                <span class="badge">5</span>
+                            </button>
+                            <button class="status-filter-btn" data-status="planning">
+                                <span>Planejando</span>
+                                <span class="badge">1</span>
+                            </button>
+                            <button class="status-filter-btn" data-status="watching">
+                                <span>Em andamento</span>
+                                <span class="badge">2</span>
+                            </button>
+                            <button class="status-filter-btn" data-status="completed">
+                                <span>Concluído</span>
+                                <span class="badge">2</span>
+                            </button>
+                            <button class="status-filter-btn" data-status="paused">
+                                <span>Pausado</span>
+                                <span class="badge">0</span>
+                            </button>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Media Grid -->
+                <section class="content">
+                    <div class="media-grid" id="mediaGrid">
+                        <!-- Media cards will be inserted here by JavaScript -->
+                    </div>
+                    
+                    <div class="empty-state" id="emptyState" style="display: none;">
+                        <div class="empty-icon">
+                            <i class="fas fa-film"></i>
+                        </div>
+                        <h3>Nenhuma mídia encontrada</h3>
+                        <p>Comece adicionando filmes, séries, livros ou anime à sua biblioteca pessoal.</p>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Add Media Modal -->
+    <div class="modal" id="addMediaModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Adicionar Nova Mídia</h3>
+                <button class="modal-close" id="modalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="addMediaForm" class="modal-body">
+                <div class="form-group">
+                    <label for="mediaTitle">Título *</label>
+                    <input type="text" id="mediaTitle" placeholder="Digite o título..." required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="mediaType">Tipo</label>
+                        <select id="mediaType">
+                            <option value="movie">Filme</option>
+                            <option value="series">Série</option>
+                            <option value="book">Livro</option>
+                            <option value="anime">Anime</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="mediaYear">Ano</label>
+                        <input type="number" id="mediaYear" min="1900" max="2030" value="2024">
+                    </div>
+                </div>
+
+                <div class="form-group" id="episodesGroup" style="display: none;">
+                    <label for="mediaEpisodes" id="episodesLabel">Episódios</label>
+                    <input type="number" id="mediaEpisodes" min="1" value="1" placeholder="Total de episódios/capítulos">
+                </div>
+
+                <div class="form-group">
+                    <label for="mediaStatus">Status Inicial</label>
+                    <select id="mediaStatus">
+                        <option value="planning">Planejando</option>
+                        <option value="watching">Assistindo/Lendo</option>
+                        <option value="completed">Concluído</option>
+                        <option value="paused">Pausado</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="mediaPoster">URL do Poster (opcional)</label>
+                    <input type="url" id="mediaPoster" placeholder="https://exemplo.com/poster.jpg">
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-outline" id="cancelBtn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Adicionar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="/frontend/src/components/script.js"></script>
+</body>
+</html>
