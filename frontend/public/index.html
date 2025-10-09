@@ -3,18 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diário de Mídia Digital</title>
+    <title>MediaBook - Diário de Mídia Digital</title>
     <link rel="stylesheet" href="/frontend/src/styles/styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="app">
+        <!-- Top Navigation Header -->
+        <header class="top-header">
+            <div class="top-header-container">
+                <!-- Logo -->
+                <button class="logo" id="logoBtn">
+                    <div class="logo-icon">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <span class="logo-text">MediaBook</span>
+                </button>
+
+                <!-- Navigation -->
+                <nav class="main-nav">
+                    <button class="nav-btn" data-type="movie">
+                        <i class="fas fa-film"></i>
+                        <span>Filmes</span>
+                    </button>
+                    <button class="nav-btn" data-type="series">
+                        <i class="fas fa-tv"></i>
+                        <span>Séries</span>
+                    </button>
+                    <button class="nav-btn" data-type="book">
+                        <i class="fas fa-book-open"></i>
+                        <span>Livros</span>
+                    </button>
+                </nav>
+
+                <!-- Search -->
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Buscar..." class="search-input">
+                </div>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <nav class="mobile-nav">
+                <button class="mobile-nav-btn" data-type="movie">
+                    <i class="fas fa-film"></i>
+                    <span>Filmes</span>
+                </button>
+                <button class="mobile-nav-btn" data-type="series">
+                    <i class="fas fa-tv"></i>
+                    <span>Séries</span>
+                </button>
+                <button class="mobile-nav-btn" data-type="book">
+                    <i class="fas fa-book-open"></i>
+                    <span>Livros</span>
+                </button>
+            </nav>
+        </header>
+
         <div class="container">
-            <!-- Header -->
-            <header class="header">
+            <!-- Page Title -->
+            <header class="page-header">
                 <div class="header-content">
                     <div class="header-text">
-                        <h1>Diário de Mídia Digital</h1>
+                        <h1>Minha Biblioteca</h1>
                         <p class="subtitle">Organize e acompanhe seu consumo de conteúdo cultural</p>
                     </div>
                     <button class="btn btn-primary" id="addMediaBtn">
