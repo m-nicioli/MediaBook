@@ -53,7 +53,8 @@ let mediaData = [
 let state = {
     activeType: 'all',
     activeStatus: 'all',
-    viewMode: 'grid'
+    viewMode: 'grid',
+    searchTerm: ''
 };
 
 // Configurações
@@ -118,7 +119,8 @@ function getFilteredMedia() {
     return mediaData.filter(item => {
         const typeMatch = state.activeType === 'all' || item.type === state.activeType;
         const statusMatch = state.activeStatus === 'all' || item.status === state.activeStatus;
-        return typeMatch && statusMatch;
+        const searchMatch = item.title.toLowerCase().includes(state.searchTerm.toLowerCase());
+        return typeMatch && statusMatch && searchMatch;
     });
 }
 
@@ -245,12 +247,14 @@ function updateFilters() {
     const summaryCount = document.querySelector('.summary-count');
     summaryCount.textContent = `${counts.total} ${counts.total === 1 ? 'item' : 'itens'} na sua coleção`;
     
-    // Atualizar filtros de tipo
+    // Atualizar filtros de tipo (sidebar)
     document.querySelectorAll('[data-type]').forEach(btn => {
         const type = btn.dataset.type;
         const count = type === 'all' ? counts.total : (counts.byType[type] || 0);
         const badge = btn.querySelector('.badge');
-        badge.textContent = count;
+        if (badge) {
+            badge.textContent = count;
+        }
         
         // Atualizar estado ativo
         btn.classList.toggle('active', state.activeType === type);
@@ -330,7 +334,29 @@ function addMedia(mediaItem) {
 
 // Event listeners para filtros
 function initializeEventListeners() {
-    // Filtros de tipo
+    // Logo button - volta para todos os tipos
+    const logoBtn = document.getElementById('logoBtn');
+    if (logoBtn) {
+        logoBtn.addEventListener('click', () => {
+            state.activeType = 'all';
+            state.searchTerm = '';
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) searchInput.value = '';
+            renderMediaGrid();
+            updateFilters();
+        });
+    }
+
+    // Search input
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            state.searchTerm = e.target.value;
+            renderMediaGrid();
+        });
+    }
+
+    // Filtros de tipo (ambos desktop e mobile)
     document.querySelectorAll('[data-type]').forEach(btn => {
         btn.addEventListener('click', (e) => {
             state.activeType = e.currentTarget.dataset.type;
