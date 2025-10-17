@@ -1,0 +1,34 @@
+{
+  "name": "mediabook",
+  "version": "1.0.0",
+  "description": "MediaBook, é um diário de mídia digital, sendo uma ferramenta completa para organizar e acompanhar o consumo de conteúdo cultural (livros, filmes, séries e animes). O objetivo é oferecer aos usuários uma experiência para permitir registro e interação com livros, filmes, séries e animes de forma intuitiva e visual.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/m-nicioli/MediaBook.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/m-nicioli/MediaBook/issues"
+  },
+  "homepage": "https://github.com/m-nicioli/MediaBook#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "mysql2": "^3.15.2"
+  },
+  "devDependencies": {
+    "jest": "^30.2.0"
+  },
+  "type": "module",
+  "scripts": {
+  "test": "jest --coverage", 
+  "start": "echo 'Inicie o servidor HTTP aqui se necessário'"
+  }
+}

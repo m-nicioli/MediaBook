@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediaBook - Diário de Mídia Digital</title>
+    <link rel="stylesheet" href="/frontend/src/styles/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app">
+        <!-- Top Navigation Header -->
+        <header class="top-header">
+            <div class="top-header-container">
+                <!-- Logo -->
+                <button class="logo" id="logoBtn">
+                    <div class="logo-icon">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <span class="logo-text">MediaBook</span>
+                </button>
+
+                <!-- Navigation -->
+                <nav class="main-nav">
+                    <button class="nav-btn" data-type="movie">
+                        <i class="fas fa-film"></i>
+                        <span>Filmes</span>
+                    </button>
+                    <button class="nav-btn" data-type="series">
+                        <i class="fas fa-tv"></i>
+                        <span>Séries</span>
+                    </button>
+                    <button class="nav-btn" data-type="book">
+                        <i class="fas fa-book-open"></i>
+                        <span>Livros</span>
+                    </button>
+                </nav>
+
+                <!-- Search -->
+            <div class="search-section">
+                <input type="text" id="searchField" placeholder="Pesquisar filmes por título..." class="search-input-large">
+                    <button id="searchButton" class="btn btn-primary">
+                        <i class="fas fa-search"></i>
+                    </button>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <nav class="mobile-nav">
+                <button class="mobile-nav-btn" data-type="movie">
+                    <i class="fas fa-film"></i>
+                    <span>Filmes</span>
+                </button>
+                <button class="mobile-nav-btn" data-type="series">
+                    <i class="fas fa-tv"></i>
+                    <span>Séries</span>
+                </button>
+                <button class="mobile-nav-btn" data-type="book">
+                    <i class="fas fa-book-open"></i>
+                    <span>Livros</span>
+                </button>
+            </nav>
+        </header>
+
+        <div class="container">
+            <!-- Page Title -->
+            <header class="page-header">
+                <div class="header-content">
+                    <div class="header-text">
+                        <h1>Minha Biblioteca</h1>
+                        <p class="subtitle">Organize e acompanhe seu consumo de conteúdo cultural</p>
+                    </div>
+                    <button class="btn btn-primary" id="addMediaBtn">
+                        <i class="fas fa-plus"></i>
+                        Adicionar Mídia
+                    </button>
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <main class="main">
+                <!-- Sidebar - Filters -->
+                <aside class="sidebar">
+                    <!-- Summary -->
+                    <div class="filter-section">
+                        <div class="summary">
+                            <div class="summary-text">
+                                <h2>Minha Biblioteca</h2>
+                                <p class="summary-count">5 itens na sua coleção</p>
+                            </div>
+                            <div class="view-modes">
+                                <button class="btn btn-sm view-mode-btn active" data-view="grid">
+                                    <i class="fas fa-th"></i>
+                                </button>
+                                <button class="btn btn-sm view-mode-btn" data-view="list">
+                                    <i class="fas fa-list"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Type Filters -->
+                    <div class="filter-section">
+                        <h3>Filtrar por Tipo</h3>
+                        <div class="filter-buttons">
+                            <button class="filter-btn active" data-type="all">
+                                <i class="fas fa-th"></i>
+                                <span>Todos</span>
+                                <span class="badge">5</span>
+                            </button>
+                            <button class="filter-btn" data-type="movie">
+                                <i class="fas fa-film"></i>
+                                <span>Filmes</span>
+                                <span class="badge">1</span>
+                            </button>
+                            <button class="filter-btn" data-type="series">
+                                <i class="fas fa-tv"></i>
+                                <span>Séries</span>
+                                <span class="badge">1</span>
+                            </button>
+                            <button class="filter-btn" data-type="book">
+                                <i class="fas fa-book"></i>
+                                <span>Livros</span>
+                                <span class="badge">1</span>
+                            </button>
+                            <button class="filter-btn" data-type="anime">
+                                <i class="fas fa-star"></i>
+                                <span>Anime</span>
+                                <span class="badge">2</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Status Filters -->
+                    <div class="filter-section">
+                        <h3>Filtrar por Status</h3>
+                        <div class="filter-buttons">
+                            <button class="status-filter-btn active" data-status="all">
+                                <span>Todos</span>
+                                <span class="badge">5</span>
+                            </button>
+                            <button class="status-filter-btn" data-status="planning">
+                                <span>Planejando</span>
+                                <span class="badge">1</span>
+                            </button>
+                            <button class="status-filter-btn" data-status="watching">
+                                <span>Em andamento</span>
+                                <span class="badge">2</span>
+                            </button>
+                            <button class="status-filter-btn" data-status="completed">
+                                <span>Concluído</span>
+                                <span class="badge">2</span>
+                            </button>
+                            <button class="status-filter-btn" data-status="paused">
+                                <span>Pausado</span>
+                                <span class="badge">0</span>
+                            </button>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Media Grid -->
+                <section class="content">
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Buscar por títulos na sua biblioteca..." class="search-input">
+                </div>
+
+                    <div class="media-grid" id="mediaGrid">
+                        <!-- Media cards will be inserted here by JavaScript -->
+                    </div>
+                    
+                    <div class="empty-state" id="emptyState" style="display: none;">
+                        <div class="empty-icon">
+                            <i class="fas fa-film"></i>
+                        </div>
+                        <h3>Nenhuma mídia encontrada</h3>
+                        <p>Comece adicionando filmes, séries, livros ou anime à sua biblioteca pessoal.</p>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Add Media Modal -->
+    <div class="modal" id="addMediaModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Adicionar Nova Mídia</h3>
+                <button class="modal-close" id="modalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="addMediaForm" class="modal-body">
+                <div class="form-group">
+                    <label for="mediaTitle">Título *</label>
+                    <input type="text" id="mediaTitle" placeholder="Digite o título..." required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="mediaType">Tipo</label>
+                        <select id="mediaType">
+                            <option value="movie">Filme</option>
+                            <option value="series">Série</option>
+                            <option value="book">Livro</option>
+                            <option value="anime">Anime</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="mediaYear">Ano</label>
+                        <input type="number" id="mediaYear" min="1900" max="2030" value="2024">
+                    </div>
+                </div>
+
+                <div class="form-group" id="episodesGroup" style="display: none;">
+                    <label for="mediaEpisodes" id="episodesLabel">Episódios</label>
+                    <input type="number" id="mediaEpisodes" min="1" value="1" placeholder="Total de episódios/capítulos">
+                </div>
+
+                <div class="form-group">
+                    <label for="mediaStatus">Status Inicial</label>
+                    <select id="mediaStatus">
+                        <option value="planning">Planejando</option>
+                        <option value="watching">Assistindo/Lendo</option>
+                        <option value="completed">Concluído</option>
+                        <option value="paused">Pausado</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="mediaPoster">URL do Poster (opcional)</label>
+                    <input type="url" id="mediaPoster" placeholder="https://exemplo.com/poster.jpg">
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-outline" id="cancelBtn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Adicionar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+<!-- Edit Media Modal -->
+<div class="modal" id="editMediaModal">
+    <div class="modal-content modal-large">
+        <div class="modal-header">
+            <h3>Editar Mídia</h3>
+            <button class="modal-close" id="editModalClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <form id="editMediaForm" class="modal-body">
+            <!-- Title and Year -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="editTitle">Título</label>
+                    <input type="text" id="editTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="editYear">Ano</label>
+                    <input type="number" id="editYear" min="1900" max="2030" required>
+                </div>
+            </div>
+
+            <!-- Type and Status -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="editType">Tipo</label>
+                    <select id="editType">
+                        <option value="movie">Filme</option>
+                        <option value="series">Série</option>
+                        <option value="book">Livro</option>
+                        <option value="anime">Anime</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="editStatus">Status</label>
+                    <select id="editStatus">
+                        <option value="planning">Planejando</option>
+                        <option value="watching">Assistindo/Lendo</option>
+                        <option value="completed">Concluído</option>
+                        <option value="paused">Pausado</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Progress Controls (visible only if media has progress) -->
+            <div class="form-group" id="editProgressGroup" style="display: none;">
+                <label>Progresso</label>
+                <div class="progress-controls">
+                    <button type="button" class="btn btn-sm" id="progressMinus">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <div class="progress-display">
+                        <span id="progressText">0 / 0</span>
+                        <div class="progress-label" id="progressLabel">Episódios</div>
+                    </div>
+                    <button type="button" class="btn btn-sm" id="progressPlus">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+                <div class="progress-bar" style="margin-top: 12px;">
+                    <div class="progress-fill" id="editProgressFill" style="width: 0%"></div>
+                </div>
+                
+                <!-- Manual Progress Inputs -->
+                <div class="form-row" style="margin-top: 12px;">
+                    <div class="form-group">
+                        <label for="editProgressCurrent">Atual</label>
+                        <input type="number" id="editProgressCurrent" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="editProgressTotal">Total</label>
+                        <input type="number" id="editProgressTotal" min="1" value="1">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rewatch Count -->
+            <div class="form-group">
+                <label for="editRewatchCount">Vezes Assistidas/Lidas</label>
+                <div class="rewatch-count-display">
+                    <input type="number" id="editRewatchCount" min="0" value="0" style="width: 100px;">
+                    <span class="rewatch-text" id="rewatchText">Nenhuma vez ainda</span>
+                </div>
+            </div>
+
+            <!-- Rating -->
+            <div class="form-group">
+                <label>Avaliação</label>
+                <div class="rating-edit">
+                    <i class="fas fa-star star-edit" data-rating="1"></i>
+                    <i class="fas fa-star star-edit" data-rating="2"></i>
+                    <i class="fas fa-star star-edit" data-rating="3"></i>
+                    <i class="fas fa-star star-edit" data-rating="4"></i>
+                    <i class="fas fa-star star-edit" data-rating="5"></i>
+                    <button type="button" class="btn btn-sm" id="clearRating" style="margin-left: 12px;">
+                        Limpar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Poster URL -->
+            <div class="form-group">
+                <label for="editPoster">URL do Poster</label>
+                <input type="url" id="editPoster" placeholder="https://exemplo.com/poster.jpg">
+            </div>
+
+            <!-- Notes -->
+            <div class="form-group">
+                <label for="editNotes">Notas Pessoais</label>
+                <textarea id="editNotes" rows="4" placeholder="Adicione suas anotações sobre esta mídia..."></textarea>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn btn-outline" id="editCancelBtn">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+    <script src="/frontend/src/js/script.js"></script>
+</body>
+</html>
