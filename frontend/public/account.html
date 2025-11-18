@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediaBook - Minha Conta</title>
+    <link rel="stylesheet" href="/frontend/src/styles/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Estilos específicos para o layout da conta */
+        .account-page-content {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .profile-card {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .profile-card h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .profile-icon {
+            font-size: 60px;
+            color: #555;
+            margin-bottom: 15px;
+        }
+        .profile-info p {
+            font-size: 1.1em;
+            margin: 10px 0;
+            color: #666;
+        }
+        .profile-info strong {
+            color: #333;
+        }
+        .action-links a {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: opacity 0.3s;
+        }
+        .action-links a:hover {
+            opacity: 0.8;
+        }
+        .logout-button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <header class="top-header">
+            <div class="top-header-container">
+                <button class="logo" onclick="window.location.href='index.html'">
+                    <div class="logo-icon"><i class="fas fa-film"></i></div>
+                    <span class="logo-text">MediaBook</span>
+                </button>
+
+                <nav class="main-nav">
+                    <a class="nav-btn" href="index.html">
+                        <i class="fas fa-list-alt"></i>
+                        <span>Minha Biblioteca</span>
+                    </a>
+                    <a class="nav-btn active" href="account.html">
+                        <i class="fas fa-user"></i>
+                        <span>Conta</span>
+                    </a>
+                </nav>
+            </div>
+        </header>
+
+        <div class="container">
+            <div class="account-page-content">
+                <header class="page-header">
+                    <h1>Configurações da Conta</h1>
+                    <p class="subtitle">Gerencie suas informações e preferências.</p>
+                </header>
+
+                <div class="profile-card">
+                    <div class="profile-icon">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <h2>Bem-vindo(a), <span id="currentUsername">Usuário</span>!</h2>
+                    
+                    <div class="profile-info">
+                        <p><strong>Status:</strong> Ativo</p>
+                        <p><strong>Membros desde:</strong> 2024</p>
+                    </div>
+
+                    <div class="action-links">
+                        <a href="library.html" class="btn btn-primary">
+                            <i class="fas fa-film"></i>
+                            Ir para Minha Biblioteca
+                        </a>
+                        <button class="btn btn-outline" disabled>
+                            <i class="fas fa-edit"></i>
+                            Editar Perfil (Em Breve)
+                        </button>
+                    </div>
+
+                    <button id="logoutButton" class="logout-button">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Sair
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Lógica de Conta (Simulação)
+        document.addEventListener('DOMContentLoaded', () => {
+            const usernameDisplay = document.getElementById('currentUsername');
+            const logoutButton = document.getElementById('logoutButton');
+            const currentUser = sessionStorage.getItem('currentUser');
+            const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+
+            if (isLoggedIn !== 'true') {
+                window.location.href = 'login.html'; // Redirecionar se não estiver logado
+                return;
+            }
+
+            if (currentUser) {
+                usernameDisplay.textContent = currentUser;
+            }
+
+            logoutButton.addEventListener('click', () => {
+                sessionStorage.removeItem('isLoggedIn');
+                sessionStorage.removeItem('currentUser');
+                window.location.href = 'login.html';
+            });
+        });
+    </script>
+</body>
+</html>

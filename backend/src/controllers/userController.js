@@ -3,8 +3,8 @@ const User = require('../models/User');
 const saltRounds = 10; 
 
 
-// Lógica para Criar Conta (Registro)
-exports.registerUser = async (req, res) => {
+// 1. Definição da função de Registro (agora como CONST)
+const registerUser = async (req, res) => {
     try {
         const { username, email, password } = req.body;
 
@@ -13,8 +13,11 @@ exports.registerUser = async (req, res) => {
         if (existingUser) {
             return res.status(409).json({ message: 'Este email já está em uso.' });
         }
+        
+        // 2. Criptografar a senha
         const hashedPassword = await bcrypt.hash(password, saltRounds); 
 
+        // 3. Salvar no banco de dados
         const userId = await User.create({ username, email, password_hash: hashedPassword });
 
         res.status(201).json({ 
@@ -28,8 +31,8 @@ exports.registerUser = async (req, res) => {
     }
 };
 
-// Lógica para Login
-exports.loginUser = async (req, res) => {
+// 2. Definição da função de Login (agora como CONST)
+const loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
 
@@ -47,16 +50,25 @@ exports.loginUser = async (req, res) => {
             return res.status(401).json({ message: 'Credenciais inválidas.' });
         }
 
-        // 3. Se as senhas baterem: AQUI VOCÊ GERARIA O JWT TOKEN
-        // Por enquanto, apenas retornamos o sucesso
-        
+        // 3. Sucesso no Login! 
         res.status(200).json({ 
-            message: 'Login bem-sucedido!', 
-            userId: user.id 
+            message: 'Login realizado com sucesso!', 
+            user: {
+                id: user.id,
+                username: user.username,
+                email: user.email
+            }
         });
 
     } catch (error) {
         console.error('Erro no login:', error);
-        res.status(500).json({ error: 'Erro interno no servidor.' });
+        res.status(500).json({ error: 'Erro interno ao tentar logar.' });
     }
+};
+
+
+// 3. Exportação ÚNICA e EXPLÍCITA de todas as funções
+module.exports = {
+    registerUser,
+    loginUser
 };

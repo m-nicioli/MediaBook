@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediaBook - Login</title>
+    <link rel="stylesheet" href="/frontend/src/styles/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Estilos básicos para o layout de login, adicione ao seu styles.css */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f2f5; /* Cor de fundo suave */
+        }
+        .login-container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .login-container h1 {
+            color: #333;
+            margin-bottom: 24px;
+        }
+        .login-container .logo-icon {
+            font-size: 48px;
+            color: var(--primary-color, #007bff); /* Assumindo uma variável de cor primária */
+            margin-bottom: 16px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        .login-button {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color, #007bff);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .login-button:hover {
+            background-color: #0056b3;
+        }
+        .error-message {
+            color: #dc3545;
+            margin-top: 10px;
+            min-height: 20px;
+        }
+
+        /* Classes para esconder campos de registro inicialmente */
+        .hidden-group {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo-icon">
+            <i class="fas fa-film"></i>
+        </div>
+        <h2 id="formTitle">Entrar no MediaBook</h2> 
+        
+        <form id="loginForm">
+            <div class="form-group hidden-group" id="usernameGroup">
+                <input type="text" id="username" name="username" placeholder="Nome de Usuário">
+            </div>
+
+            <div class="form-group">
+                <input type="email" id="email" name="email" placeholder="Email" required>
+            </div>
+
+            <div class="form-group">
+                <input type="password" id="password" name="password" placeholder="Senha" required>
+            </div>
+            
+            <div class="form-group hidden-group" id="confirmPasswordGroup">
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmar Senha">
+            </div>
+            
+            <p class="error-message" id="errorMessage"></p>
+            
+            <button type="submit" class="login-button" id="submitButton">Acessar</button>
+            
+            <p class="toggle-mode">
+                Não tem uma conta? 
+                <a href="#" id="registerToggle">Crie uma agora!</a>
+            </p>
+        </form>
+    </div>
+    <script src="/frontend/src/js/login.js"></script>
+</body>
+</html>

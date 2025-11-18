@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const userController = require('../controllers/userController'); // Importa o Controller
+//const userController = require('../controllers/userController'); // Importa o Controller
+const userController = require('../controllers/userController.js');
 
 // Rota para Cadastro de Usuário
 router.post('/register', userController.registerUser);

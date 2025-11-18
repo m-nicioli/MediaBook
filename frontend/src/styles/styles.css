@@ -1930,3 +1930,33 @@ textarea:focus {
         font-size: 24px;
     }
 }
+
+/* 1. Regra para remover o sublinhado em todos os links de navegação */
+/* Isso afeta tanto os links de mídia (.media-link) quanto os botões do menu (.nav-btn) */
+.media-link,
+.main-nav a.nav-btn,
+.mobile-nav a.mobile-nav-btn {
+    text-decoration: none; /* Remove o sublinhado */
+    color: inherit;      /* Garante que a cor do texto seja herdada (geralmente preto ou branco) */
+}
+
+/* 2. Regras para manter a cor e o efeito visual do menu */
+
+/* Efeito ao passar o mouse: remove o sublinhado e mantém o estilo */
+.media-link:hover .card-title {
+    color: var(--color-primary); /* Faz o título do card ficar colorido no hover (opcional) */
+}
+
+/* Efeito ao passar o mouse nos botões de menu: */
+.main-nav a.nav-btn:hover,
+.mobile-nav a.mobile-nav-btn:hover {
+    text-decoration: none; /* Garante que o sublinhado não apareça no hover */
+    color: var(--color-primary); /* Faz o texto ficar colorido no hover (opcional) */
+}
+
+/* Garante que os botões ativos do menu não tenham sublinhado e fiquem com a cor padrão */
+.main-nav a.nav-btn.active,
+.mobile-nav a.mobile-nav-btn.active {
+    color: var(--color-primary); /* Mantém a cor do item ativo */
+    text-decoration: none;
+}
