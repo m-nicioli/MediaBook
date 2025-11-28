@@ -7,8 +7,8 @@ const mysql = require('mysql2');
 // ⭐ INSERIR SUAS CREDENCIAIS REAIS AQUI ⭐
 // O erro era porque o Node.js estava lendo estas credenciais como vazias.
 const DB_CREDENTIALS = {
-    host: '',       // Geralmente 'localhost'
-    user: '',       // Seu usuário do MySQL (ex: 'root')
+    host: 'localhost',       // Geralmente 'localhost'
+    user: 'root',       // Seu usuário do MySQL (ex: 'root')
     password: '',  // Sua senha do MySQL
     database: ''   // O nome do seu banco de dados
 };

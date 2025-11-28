@@ -8,7 +8,7 @@ create table Users (
     password_hash VARCHAR(255) NOT NULL, 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     -- Campo para rastrear a última atividade (útil para segurança e manutenção)
-    last_login TIMESTAMP NULL 
+    last_login TIMESTAMP NULL
 );
 
 CREATE TABLE Media (
@@ -40,3 +40,13 @@ CREATE TABLE UserMedia (
     FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE,
     FOREIGN KEY (media_id) REFERENCES Media(id) ON DELETE CASCADE 
 );
+
+
+INSERT INTO Users (username, email, password_hash) 
+VALUES ('ananinha_2', 'ana@gmail.com', '$2y$10$YdRZVUPGoYjDBqCFPY.J7.KfZPpwF3r4LyynNL3LchmLcOwRCLtv2');
+
+
+UPDATE usuarios SET password_hash = '$2b$10$C2yE9UlO3eQQBdYzQDtoQekzTvB9W76hEdqv6.0Yc5.LAGqAtIMu.' WHERE idUsuario = 1;
+
+select * from Users;
+-- drop database mediabook;

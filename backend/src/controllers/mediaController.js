@@ -1,5 +1,5 @@
 // CÓDIGO CORRETO
-const Media = require('../src/models/Media.js'); // a linha vermelha é normal são se assuste. 
+const Media = require('../models/Media.js'); // a linha vermelha é normal são se assuste. 
 
 // ⚠️ Middleware de Autenticação SIMULADO
 // Este middleware é essencial até que você implemente o JWT.
